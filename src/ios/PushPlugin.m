@@ -503,7 +503,7 @@
             [matchingNotificationIdentifiers addObject:notification.request.identifier];
         }
         [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:matchingNotificationIdentifiers];
-        
+
         NSString *message = [NSString stringWithFormat:@"Cleared notification with ID: %@", notId];
         CDVPluginResult *commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:message];
         [self.commandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
@@ -532,6 +532,7 @@
 
 - (void)clearAllNotifications:(CDVInvokedUrlCommand *)command
 {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 
     NSString* message = [NSString stringWithFormat:@"cleared all notifications"];
